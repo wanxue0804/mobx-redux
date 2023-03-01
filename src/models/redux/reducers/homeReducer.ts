@@ -3,10 +3,13 @@ import * as actionsType from '@/redux/actions/constant';
 
 export interface IhomeState {
     count: number;
-    todoList: {
-        id: string;
-        task: string;
-    }[]
+    todoList: Ilist[];
+};
+
+export interface Ilist {
+    id: string;
+    task: string;
+    complete: boolean;
 }
 
 const initialState: IhomeState = {
@@ -26,6 +29,16 @@ export default (state: IhomeState = initialState, action: AnyAction): IhomeState
             return {
                 todoList: state.todoList.splice(index, 1),
                 count: state.todoList.length--
+            }
+        case actionsType.TOGGLE_COMPLETE:
+            return {
+                ...state,
+                todoList: state.todoList.map((item) => {
+                    if (item.id === action.payload.id) {
+                        item.complete = !item.complete;
+                    }
+                    return item;
+                })
             }
         default:
             return state;

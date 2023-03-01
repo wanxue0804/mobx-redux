@@ -14,3 +14,10 @@ export function deleteItem (payload: any = {}) {
         payload
     }
 }
+
+export function toggleState (payload: any = {}) {
+    return {
+        type: actionsType.TOGGLE_COMPLETE,
+        payload
+    }
+}

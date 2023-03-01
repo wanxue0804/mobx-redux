@@ -4,14 +4,14 @@ import homeReducer, { IhomeState } from './homeReducer';
 
 
 // 第一种手动引入模式
-// export interface CombinedState {
-//     homeReducer: IhomeState
-// }
+export interface RootState {
+    homeReducer: IhomeState
+}
 
-// const reducers: ReducersMapObject<CombinedState, AnyAction> = {
+// const reducers: ReducersMapObject<RootState, AnyAction> = {
 //     homeReducer
 // }
-// const reducer: Reducer<CombinedState, AnyAction> = combineReducers(reducers);
+// const reducer: Reducer<RootState, AnyAction> = combineReducers(reducers);
 // 
 
 
