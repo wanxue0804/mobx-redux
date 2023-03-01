@@ -333,8 +333,10 @@ module.exports = function (webpackEnv) {
           'react-dom$': 'react-dom/profiling',
           'scheduler/tracing': 'scheduler/tracing-profiling',
         }),
-        '@': paths.appSrc,
         '@/static': path.resolve(paths.appSrc, 'static'),
+        "@/redux": path.resolve(__dirname, '../src/models/redux'),
+        "@/mobx": path.resolve(paths.appSrc, 'models/mobx'),
+        '@': paths.appSrc,// 通配放后面
         ...(modules.webpackAliases || {}),
       },
       plugins: [
