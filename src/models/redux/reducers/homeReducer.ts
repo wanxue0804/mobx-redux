@@ -17,19 +17,18 @@ const initialState: IhomeState = {
     todoList: []
 }
 
-export default (state: IhomeState = initialState, action: AnyAction): IhomeState => {
+const homeReducer = (state: IhomeState = initialState, action: AnyAction): IhomeState => {
     switch(action.type) {
         case actionsType.ADD:
             return {
                 todoList: state.todoList.concat(action.payload),
-                count: state.todoList.length++
+                count: state.todoList.length+1
             };
         case actionsType.DELETE:
-            const index = state.todoList.findIndex(item => item.id === action.payload.id);
             return {
-                todoList: state.todoList.splice(index, 1),
-                count: state.todoList.length--
-            }
+                todoList: state.todoList.filter(item => item.id !== action.payload.id),
+                count: state.todoList.length-1
+            };
         case actionsType.TOGGLE_COMPLETE:
             return {
                 ...state,
@@ -44,3 +43,5 @@ export default (state: IhomeState = initialState, action: AnyAction): IhomeState
             return state;
     }
 }
+
+export default homeReducer;

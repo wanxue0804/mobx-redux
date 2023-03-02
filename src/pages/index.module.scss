@@ -27,10 +27,11 @@
                 p {
                     &.complete {
                         color: gray;
-                        text-decoration: overline;
+                        text-decoration: line-through;
                     }
                 }
                 span {
+                    font-size: 14px;
                     margin-left: 10px;
                 }
             }
