@@ -6,6 +6,7 @@ interface Ilist {
     complete: boolean;
 }
 
+
 class Home {
     constructor() {
         // mobx6.0之后必须要加上这一句
@@ -25,7 +26,6 @@ class Home {
 
     // 新增列表
     @action add (payload: any) {
-        console.log('zzzzzzzzzzmmmmmmm', payload, this)
         this.todoList = this.todoList.concat(payload);
     };
 
