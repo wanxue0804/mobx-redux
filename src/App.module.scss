@@ -8,7 +8,11 @@
       display: flex;
       flex-direction: row;
       .redux {
+        flex: 1;
         background: blanchedalmond;
+        &.mobx {
+          background: seashell;
+        }
       }
     }
   }

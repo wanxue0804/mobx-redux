@@ -25,7 +25,9 @@
       "@/static/*": ["./src/static/*"],
       "@/redux/*": ["./src/models/redux/*"],
       "@/mobx/*": ["./src/models/mobx/*"]
-    }
+    },
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
   },
   "include": [
     "src"

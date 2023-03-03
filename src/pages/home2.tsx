@@ -1,25 +1,22 @@
-import { useState } from 'react';
-import { autorun } from 'mobx';
+import { useState, useEffect } from 'react';
 import { inject, observer } from 'mobx-react';
 import styles from './index.module.scss';
+import { useHomeStore, usePersonStore } from '@/mobx/storeHooks';
 
 
-interface Iprops {
-    homeStore?: any;
-    personStore?: any;
-}
-
-
-let renderCount = 0;
-function Home({ homeStore, personStore, ...resProps }: Iprops) {
-    const { todoList, count } = homeStore;
-    // const { time } = personStore; // 加这一行就会一直渲染
-    console.log('wwwwwwwwwwwwww渲染了吗', {resProps}, homeStore, personStore)
+function Home() {
+    const homeStore = useHomeStore();
+    const personStore = usePersonStore();
+    const { todoList = [], count = 0 } = homeStore;
     const [inputText, setInputText] = useState('');
-    renderCount = renderCount + 1;
-    autorun(() => {
-        console.log('自动执行')
-    })
+
+    let timer: any = null;
+    useEffect(() => {
+        timer && clearInterval(timer);
+        timer = setInterval(() => {
+            personStore.add(1);
+        }, 5000);
+    }, [])
 
     // 输入框输入
     const onChange = ({target}: any) => {
@@ -33,7 +30,12 @@ function Home({ homeStore, personStore, ...resProps }: Iprops) {
             id: todoList.length + 1,
             task: inputText,
             complete: false
-        })
+        });
+        personStore.addList({
+            id: todoList.length + 1,
+            task: inputText,
+            complete: false
+        });
         setInputText('');
     };
 
@@ -48,11 +50,10 @@ function Home({ homeStore, personStore, ...resProps }: Iprops) {
                 <input value={inputText} placeholder='输入task内容' onChange={onChange} />
                 <button onClick={addTask}>新增task</button>
             </div>
-            <p>当前列表个数: {count}-{personStore.list.length}</p>
-            <p>当前组件渲染次数：{renderCount}</p>
+            <p>当前列表个数: {count}-{personStore.time}</p>
             <div className='list_container'>
                 {
-                    todoList.map((item: any, index: number) => {
+                    todoList.map((item: any, index) => {
                         return (
                             <div key={`${item.id}-${index}`} className='item'>
                                 <p className={`${item.complete ? 'complete' : ''}`} onClick={() => handleToggleComplete(item.id)}>{item.task}</p>
@@ -67,4 +68,4 @@ function Home({ homeStore, personStore, ...resProps }: Iprops) {
 }
 
 
-export default inject('homeStore', 'personStore')(observer(Home));
+export default observer(Home);
