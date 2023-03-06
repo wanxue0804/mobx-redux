@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { autorun } from 'mobx';
 import { inject, observer } from 'mobx-react';
+import { IHome } from '@/mobx/home';
 import styles from './index.module.scss';
 
 

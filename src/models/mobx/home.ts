@@ -6,8 +6,17 @@ interface Ilist {
     complete: boolean;
 }
 
+export interface IHome {
+    todoList: Ilist[];
+    count: number;
+    test: () => void;
+    add: (payload: any) => void;
+    toggleComplete: (id: number | string) => void;
+    deleteItem: (id: number|string) => void;
+}
 
-class Home {
+
+class Home implements IHome {
     constructor() {
         // mobx6.0之后必须要加上这一句
         makeAutoObservable(this);
